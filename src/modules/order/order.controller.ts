@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@ne
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-
+import { IsPublic } from 'src/common/decorators/public.decorators';
 @Controller('order')
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
@@ -18,6 +18,9 @@ export class OrderController {
       }
     }
 }
+  
+
+  @IsPublic()
   @Post('webhook/kashier')
   @HttpCode(200)
   async kashierWebhook(@Body() body: any) {
